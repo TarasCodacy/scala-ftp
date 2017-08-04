@@ -71,7 +71,8 @@ final class FTP(client: FTPClient) {
    * Download a single file i.e downloadFile("data.csv")
    */
   def downloadFile(remote: String): Boolean = {
-    val os = new FileOutputStream(new File(remote))
+    val refined = remote.replaceAll("../", "")
+    val os = new FileOutputStream(new File(refined))
     client.retrieveFile(remote, os)
   }
 
